@@ -32,10 +32,7 @@ def send_message():
     with open('today_data/today_habit.json', 'r', encoding='utf-8') as f:
         data = json.load(f)
         dict_data = json.loads(data)
-        print(type(dict_data))
         for habit in dict_data:
-            print(f' this is our el in send_message -> {habit}')
-            print(habit['fields']['time'])
             habit_time = datetime.strptime(habit['fields']['time'], '%H:%M:%S')
             if datetime.strftime(habit_time, '%H:%M:%S') == datetime.now().strftime('%H:%M:%S'):
                 send_message_in_tg(chat_id=User.objects.get(pk=habit.user),
